@@ -1,0 +1,4 @@
+*** Error at (4,27): incompatible operands: int unknow int
+*** Error at (13,19): incompatible operands: int unknow int
+*** Error at (14,20): incompatible operands: int unknow int
+*** Error at (14,25): incompatible operands: bool unknow int

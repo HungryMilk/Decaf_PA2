@@ -1,0 +1,14 @@
+*** Error at (3,15): test expression must have bool type
+*** Error at (6,13): incompatible return: bool given, int expected
+*** Error at (6,20): incompatible operand: ! int
+*** Error at (14,23): incompatible operands: int unknow int
+*** Error at (15,29): incompatible operands: int unknow int
+*** Error at (21,15): incompatible operands: int unknow int
+*** Error at (22,13): incompatible return: bool given, int expected
+*** Error at (22,20): incompatible operand: ! int
+*** Error at (26,18): incompatible operands: int unknow int
+*** Error at (28,19): incompatible operands: int unknow int
+*** Error at (34,15): incompatible operands: int unknow int
+*** Error at (42,15): incompatible operands: int unknow int
+*** Error at (52,24): incompatible operand: ! int
+*** Error at (52,24): incompatible argument 1: bool given, int expected

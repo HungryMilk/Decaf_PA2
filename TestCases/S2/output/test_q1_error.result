@@ -1,0 +1,12 @@
+*** Error at (15,7): incompatible operands: int = bool
+*** Error at (16,7): incompatible operands: int = bool
+*** Error at (17,7): incompatible operands: int = bool
+*** Error at (18,7): incompatible operands: int = bool
+*** Error at (20,7): incompatible operands: int = bool
+*** Error at (20,8): undeclared variable 'v'
+*** Error at (21,7): incompatible operands: int = bool
+*** Error at (21,8): undeclared variable 'v'
+*** Error at (22,7): incompatible operands: int = bool
+*** Error at (22,10): undeclared variable 'v'
+*** Error at (23,7): incompatible operands: int = bool
+*** Error at (23,10): undeclared variable 'v'

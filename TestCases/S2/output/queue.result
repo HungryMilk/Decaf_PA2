@@ -1,0 +1,5 @@
+*** Error at (45,33): incompatible operands: class : QueueItem <= class : QueueItem
+*** Error at (65,23): incompatible operands: int unknow int
+*** Error at (68,23): incompatible operands: int unknow int
+*** Error at (72,23): incompatible operands: int unknow int
+*** Error at (74,23): incompatible operands: int unknow int

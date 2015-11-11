@@ -1,0 +1,8 @@
+*** Error at (5,8): incompatible operands: int = bool
+*** Error at (5,11): incompatible operand: ! int
+*** Error at (6,8): incompatible operands: int = bool
+*** Error at (6,11): incompatible operand: ! int
+*** Error at (7,8): incompatible operands: int = bool
+*** Error at (7,10): incompatible operand: ! int
+*** Error at (8,8): incompatible operands: int = bool
+*** Error at (8,10): incompatible operand: ! int
