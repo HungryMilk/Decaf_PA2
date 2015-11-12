@@ -690,8 +690,8 @@ public abstract class Tree {
      * A guardedIf statement
      */
     public static class GuardedIf extends Tree {
-    	public List<Tree> GuardedStmts;
-    	public GuardedIf(List<Tree> stmts, Location loc) {
+    	public List<GuardedStmt> GuardedStmts;
+    	public GuardedIf(List<GuardedStmt> stmts, Location loc) {
 			super(GUARDIF, loc);
 			this.GuardedStmts = stmts;
 		}
@@ -703,7 +703,7 @@ public abstract class Tree {
 		public void printTo(IndentPrintWriter pw) {
 			pw.println("guardedif");
     		pw.incIndent();
-    		for (Tree s : GuardedStmts) {
+    		for (GuardedStmt s : GuardedStmts) {
     			s.printTo(pw);
     		}
     		pw.decIndent();
@@ -713,8 +713,8 @@ public abstract class Tree {
      * A guardedDo statement
      */
     public static class GuardedDo extends Tree {
-    	public List<Tree> GuardedStmts;
-    	public GuardedDo(List<Tree> stmts, Location loc) {
+    	public List<GuardedStmt> GuardedStmts;
+    	public GuardedDo(List<GuardedStmt> stmts, Location loc) {
 			super(GUARDDO, loc);
 			this.GuardedStmts = stmts;
 		}
@@ -726,7 +726,7 @@ public abstract class Tree {
 		public void printTo(IndentPrintWriter pw) {
 			pw.println("guardeddo");
     		pw.incIndent();
-    		for (Tree s : GuardedStmts) {
+    		for (GuardedStmt s : GuardedStmts) {
     			s.printTo(pw);
     		}
     		pw.decIndent();
@@ -736,19 +736,21 @@ public abstract class Tree {
      * A guarded statement
      */
     public static class GuardedStmt extends Tree {
-    	public Expr expr;
-    	public Tree stmt;
-		public GuardedStmt(Expr expr, Tree stmt, Location loc) {
+    	public Expr condition;
+    	public List<Tree> stmts;
+		public GuardedStmt(Expr expr, List<Tree> stmt, Location loc) {
 			super(GUARD, loc);
-			this.expr = expr;
-			this.stmt = stmt;
+			this.condition = expr;
+			this.stmts = stmt;
 		}
 		@Override
 		public void printTo(IndentPrintWriter pw) {
 			pw.println("guardedstmt");
 			pw.incIndent();
-			expr.printTo(pw);
-			stmt.printTo(pw);
+			condition.printTo(pw);
+			for (Tree s : stmts) {
+    			s.printTo(pw);
+    		}
 			pw.decIndent();
 		}
 		@Override
@@ -1271,6 +1273,7 @@ public abstract class Tree {
     public static class Numinstances extends Expr {
     	
     	public String className;
+    	public Class symbol;
 		public Numinstances(String className, Location loc) {
 			super(NUMINSTANCES, loc);
 			this.className = className;

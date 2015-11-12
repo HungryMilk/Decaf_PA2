@@ -6,6 +6,7 @@ import decaf.Location;
 import decaf.tree.Tree;
 import decaf.tree.Tree.ClassDef;
 import decaf.tree.Tree.Expr;
+import decaf.tree.Tree.GuardedStmt;
 import decaf.tree.Tree.MethodDef;
 import decaf.tree.Tree.LValue;
 import decaf.tree.Tree.TopLevel;
@@ -39,6 +40,8 @@ public class SemValue {
 	 * statement list
 	 */
 	public List<Tree> slist;
+	
+	public List<GuardedStmt> glist;
 
 	public List<Expr> elist;
 
@@ -53,6 +56,8 @@ public class SemValue {
 	public TypeLiteral type;
 
 	public Tree stmt;
+	
+	public GuardedStmt gdst;
 
 	public Expr expr;
 

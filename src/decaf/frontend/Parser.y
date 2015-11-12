@@ -450,30 +450,30 @@ PrintStmt       :   PRINT '(' ExprList ')'
                 ;
 GuardedIfStmt   :   IF GuardedStmts FI
                     {
-                        $$.stmt = new Tree.GuardedIf($2.slist, $2.loc);
+                        $$.stmt = new Tree.GuardedIf($2.glist, $2.loc);
                     }
                 ;
 GuardedDoStmt   :   DO GuardedStmts OD
                     {
-                        $$.stmt = new Tree.GuardedDo($2.slist, $2.loc);
+                        $$.stmt = new Tree.GuardedDo($2.glist, $2.loc);
                     }
                 ;
 GuardedStmts    :   GuardedStmts GUARD GuardedStmt
                     {
-                        $$.slist.add($3.stmt);
+                        $$.glist.add($3.gdst);
                     }
 
                 |   GuardedStmt
                     {
                         $$ = new SemValue();
-                        $$.slist = new ArrayList<Tree>();
-                        $$.slist.add($1.stmt);
+                        $$.glist = new ArrayList<Tree.GuardedStmt>();
+                        $$.glist.add($1.gdst);
                     }
                 ;
 
-GuardedStmt     :   Expr ':' Stmt
+GuardedStmt     :   Expr ':' StmtList
                     {
-                        $$.stmt = new Tree.GuardedStmt($1.expr, $3.stmt, $1.loc);
+                        $$.gdst = new Tree.GuardedStmt($1.expr, $3.slist, $1.loc);
                     }
                 ;
 

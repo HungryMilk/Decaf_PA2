@@ -9,7 +9,9 @@ import javax.swing.text.html.HTML.Tag;
 import decaf.Driver;
 import decaf.Location;
 import decaf.tree.Tree;
-import decaf.tree.Tree.Expr;
+import decaf.tree.Tree.GuardedDo;
+import decaf.tree.Tree.GuardedIf;
+import decaf.tree.Tree.GuardedStmt;
 import decaf.error.BadArgCountError;
 import decaf.error.BadArgTypeError;
 import decaf.error.BadArrElementError;
@@ -342,7 +344,19 @@ public class TypeCheck extends Tree.Visitor {
 					instanceofExpr.className));
 		}
 	}
-
+	/**
+	 * the numinstances expression
+	 */
+	@Override
+	public void visitNuminstances(Tree.Numinstances numinstancesExpr) {
+		Class c = table.lookupClass(numinstancesExpr.className);
+		numinstancesExpr.symbol = c;
+		numinstancesExpr.type = BaseType.INT;
+		if (c == null) {
+			issueError(new ClassNotFoundError(numinstancesExpr.getLocation(),
+					numinstancesExpr.className));
+		}
+	}
 	@Override
 	public void visitTypeCast(Tree.TypeCast cast) {
 		cast.expr.accept(this);
@@ -520,7 +534,27 @@ public class TypeCheck extends Tree.Visitor {
 			ifStmt.falseBranch.accept(this);
 		}
 	}
-
+	@Override
+	public void visitGuardedStmt(GuardedStmt guardedStmt) {
+		checkTestExpr(guardedStmt.condition);
+		for (Tree s : guardedStmt.stmts) {
+			s.accept(this);
+		}
+	}
+	@Override
+	public void visitGuardedIf(GuardedIf guardedIf) {
+		for (GuardedStmt g : guardedIf.GuardedStmts) {
+			g.accept(this);
+		}
+	}
+	@Override
+	public void visitGuardedDo(GuardedDo guardedDo) {
+		breaks.add(guardedDo);
+		for (GuardedStmt g : guardedDo.GuardedStmts) {
+			g.accept(this);
+		}
+		breaks.pop();
+	}
 	@Override
 	public void visitPrint(Tree.Print printStmt) {
 		int i = 0;

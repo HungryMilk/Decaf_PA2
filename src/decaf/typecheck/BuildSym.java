@@ -4,6 +4,8 @@ import java.util.Iterator;
 
 import decaf.Driver;
 import decaf.tree.Tree;
+import decaf.tree.Tree.GuardedIf;
+import decaf.tree.Tree.GuardedStmt;
 import decaf.error.BadArrElementError;
 import decaf.error.BadInheritanceError;
 import decaf.error.BadOverrideError;
@@ -207,6 +209,24 @@ public class BuildSym extends Tree.Visitor {
 			s.accept(this);
 		}
 		table.close();
+	}
+	@Override
+	public void visitGuardedStmt(GuardedStmt guardedStmt) {
+		for (Tree s : guardedStmt.stmts) {
+			s.accept(this);
+		}
+	}
+	@Override
+	public void visitGuardedIf(Tree.GuardedIf guardedIf) {
+		for (Tree s : guardedIf.GuardedStmts) {
+			s.accept(this);
+		}
+	}
+	@Override
+	public void visitGuardedDo(Tree.GuardedDo guardedDo) {
+		for (Tree s : guardedDo.GuardedStmts) {
+			s.accept(this);
+		}
 	}
 
 	@Override

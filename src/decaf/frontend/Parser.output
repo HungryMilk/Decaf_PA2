@@ -128,7 +128,7 @@
   95  GuardedStmts : GuardedStmts GUARD GuardedStmt
   96               | GuardedStmt
 
-  97  GuardedStmt : Expr ':' Stmt
+  97  GuardedStmt : Expr ':' StmtList
 
 state 0
 	$accept : . Program $end  (0)
@@ -1158,7 +1158,7 @@ state 88
 	Expr : Expr . AND Expr  (64)
 	Expr : Expr . OR Expr  (65)
 	Expr : Expr . '?' Expr ':' Expr  (69)
-	GuardedStmt : Expr . ':' Stmt  (97)
+	GuardedStmt : Expr . ':' StmtList  (97)
 
 	AND  shift 112
 	OR  shift 113
@@ -2157,58 +2157,12 @@ state 133
 
 
 state 134
-	GuardedStmt : Expr ':' . Stmt  (97)
-	SimpleStmt : .  (40)
-	Receiver : .  (42)
+	GuardedStmt : Expr ':' . StmtList  (97)
+	StmtList : .  (26)
 
-	VOID  shift 12
-	BOOL  shift 13
-	INT  shift 14
-	STRING  shift 15
-	CLASS  shift 16
-	NULL  shift 46
-	THIS  shift 47
-	WHILE  shift 48
-	FOR  shift 49
-	IF  shift 50
-	RETURN  shift 51
-	BREAK  shift 52
-	NEW  shift 53
-	PRINT  shift 54
-	READ_INTEGER  shift 55
-	READ_LINE  shift 56
-	LITERAL  shift 57
-	INSTANCEOF  shift 58
-	NUMINSTANCES  shift 59
-	SELF_PLUS  shift 60
-	SELF_MINUS  shift 61
-	'-'  shift 62
-	'!'  shift 63
-	'('  shift 64
-	'{'  shift 41
-	DO  shift 66
-	IDENTIFIER  reduce 42
-	';'  reduce 40
+	.  reduce 26
 
-	VariableDef  goto 67
-	Variable  goto 20
-	Type  goto 33
-	StmtBlock  goto 68
-	Stmt  goto 168
-	SimpleStmt  goto 70
-	IfStmt  goto 71
-	WhileStmt  goto 72
-	ForStmt  goto 73
-	ReturnStmt  goto 74
-	PrintStmt  goto 75
-	BreakStmt  goto 76
-	GuardedIfStmt  goto 77
-	GuardedDoStmt  goto 78
-	LValue  goto 79
-	Expr  goto 80
-	Call  goto 81
-	Receiver  goto 82
-	Constant  goto 83
+	StmtList  goto 168
 
 
 state 135
@@ -3303,9 +3257,62 @@ state 167
 
 
 state 168
-	GuardedStmt : Expr ':' Stmt .  (97)
+	StmtList : StmtList . Stmt  (25)
+	GuardedStmt : Expr ':' StmtList .  (97)
+	SimpleStmt : .  (40)
+	Receiver : .  (42)
 
-	.  reduce 97
+	VOID  shift 12
+	BOOL  shift 13
+	INT  shift 14
+	STRING  shift 15
+	CLASS  shift 16
+	NULL  shift 46
+	THIS  shift 47
+	WHILE  shift 48
+	FOR  shift 49
+	IF  shift 50
+	RETURN  shift 51
+	BREAK  shift 52
+	NEW  shift 53
+	PRINT  shift 54
+	READ_INTEGER  shift 55
+	READ_LINE  shift 56
+	LITERAL  shift 57
+	INSTANCEOF  shift 58
+	NUMINSTANCES  shift 59
+	SELF_PLUS  shift 60
+	SELF_MINUS  shift 61
+	'-'  shift 62
+	'!'  shift 63
+	'('  shift 64
+	'{'  shift 41
+	DO  shift 66
+	IDENTIFIER  reduce 42
+	';'  reduce 40
+	FI  reduce 97
+	OD  reduce 97
+	GUARD  reduce 97
+
+	VariableDef  goto 67
+	Variable  goto 20
+	Type  goto 33
+	StmtBlock  goto 68
+	Stmt  goto 69
+	SimpleStmt  goto 70
+	IfStmt  goto 71
+	WhileStmt  goto 72
+	ForStmt  goto 73
+	ReturnStmt  goto 74
+	PrintStmt  goto 75
+	BreakStmt  goto 76
+	GuardedIfStmt  goto 77
+	GuardedDoStmt  goto 78
+	LValue  goto 79
+	Expr  goto 80
+	Call  goto 81
+	Receiver  goto 82
+	Constant  goto 83
 
 
 state 169

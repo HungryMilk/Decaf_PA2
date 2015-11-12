@@ -1,13 +1,19 @@
-Exception in thread "main" java.lang.NullPointerException
-	at decaf.typecheck.TypeCheck.visitAssign(TypeCheck.java:483)
-	at decaf.tree.Tree$Assign.accept(Tree.java:950)
-	at decaf.typecheck.TypeCheck.visitBlock(TypeCheck.java:472)
-	at decaf.tree.Tree$Block.accept(Tree.java:515)
-	at decaf.typecheck.TypeCheck.visitMethodDef(TypeCheck.java:455)
-	at decaf.tree.Tree$MethodDef.accept(Tree.java:435)
-	at decaf.typecheck.TypeCheck.visitClassDef(TypeCheck.java:446)
-	at decaf.tree.Tree$ClassDef.accept(Tree.java:400)
-	at decaf.typecheck.TypeCheck.visitTopLevel(TypeCheck.java:463)
-	at decaf.typecheck.TypeCheck.checkType(TypeCheck.java:64)
-	at decaf.Driver.compile(Driver.java:93)
-	at decaf.Driver.main(Driver.java:107)
+GLOBAL SCOPE:
+    (1,1) -> class A
+    (7,1) -> class B : A
+    (14,1) -> class Main
+    CLASS SCOPE OF 'A':
+        (2,6) -> function f : class : A->int
+        FORMAL SCOPE OF 'f':
+            (2,6) -> variable @this : class : A
+            LOCAL SCOPE:
+    CLASS SCOPE OF 'B':
+        (8,6) -> function g : class : B->int
+        FORMAL SCOPE OF 'g':
+            (8,6) -> variable @this : class : B
+            LOCAL SCOPE:
+    CLASS SCOPE OF 'Main':
+        (15,17) -> static function main : void
+        FORMAL SCOPE OF 'main':
+            LOCAL SCOPE:
+                (16,10) -> variable a : int
