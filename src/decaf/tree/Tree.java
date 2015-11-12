@@ -1085,13 +1085,13 @@ public abstract class Tree {
      * A ternary operation.
      */
     public static class Ternary extends Expr {
+    	public Expr condition;
     	public Expr left;
-    	public Expr middle;
     	public Expr right;
 		public Ternary(int kind, Expr left, Expr middle, Expr right, Location loc) {
 			super(kind, loc);
-			this.left = left;
-    		this.middle = middle;
+			this.condition = left;
+    		this.left = middle;
     		this.right = right;
 		}
 		@Override
@@ -1104,8 +1104,8 @@ public abstract class Tree {
         	case TERNARY:
         		pw.println("cond");
         		pw.incIndent();
+        		condition.printTo(pw);
         		left.printTo(pw);
-        		middle.printTo(pw);
         		right.printTo(pw);
         		pw.decIndent();
     			break;

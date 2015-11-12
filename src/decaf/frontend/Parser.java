@@ -1184,25 +1184,25 @@ break;
 case 49:
 //#line 256 "Parser.y"
 {
-                        yyval.expr = new Tree.Unary(Tree.PREINC, val_peek(0).expr, val_peek(1).loc);
+                        yyval.expr = new Tree.Unary(Tree.PREINC, val_peek(0).expr, val_peek(0).loc);
                     }
 break;
 case 50:
 //#line 260 "Parser.y"
 {
-                        yyval.expr = new Tree.Unary(Tree.PREDEC, val_peek(0).expr, val_peek(1).loc);
+                        yyval.expr = new Tree.Unary(Tree.PREDEC, val_peek(0).expr, val_peek(0).loc);
                     }
 break;
 case 51:
 //#line 264 "Parser.y"
 {
-                        yyval.expr = new Tree.Unary(Tree.POSTINC, val_peek(1).expr, val_peek(0).loc);
+                        yyval.expr = new Tree.Unary(Tree.POSTINC, val_peek(1).expr, val_peek(1).loc);
                     }
 break;
 case 52:
 //#line 268 "Parser.y"
 {
-                        yyval.expr = new Tree.Unary(Tree.POSTDEC, val_peek(1).expr, val_peek(0).loc);
+                        yyval.expr = new Tree.Unary(Tree.POSTDEC, val_peek(1).expr, val_peek(1).loc);
                     }
 break;
 case 53:

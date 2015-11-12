@@ -254,19 +254,19 @@ Expr            :   LValue
                 |   Constant
                 |   SELF_PLUS Expr
                     {
-                        $$.expr = new Tree.Unary(Tree.PREINC, $2.expr, $1.loc);
+                        $$.expr = new Tree.Unary(Tree.PREINC, $2.expr, $2.loc);
                     }
                 |   SELF_MINUS Expr
                     {
-                        $$.expr = new Tree.Unary(Tree.PREDEC, $2.expr, $1.loc);
+                        $$.expr = new Tree.Unary(Tree.PREDEC, $2.expr, $2.loc);
                     }
                 |   Expr SELF_PLUS
                     {
-                        $$.expr = new Tree.Unary(Tree.POSTINC, $1.expr, $2.loc);
+                        $$.expr = new Tree.Unary(Tree.POSTINC, $1.expr, $1.loc);
                     }
                 |   Expr SELF_MINUS
                     {
-                        $$.expr = new Tree.Unary(Tree.POSTDEC, $1.expr, $2.loc);
+                        $$.expr = new Tree.Unary(Tree.POSTDEC, $1.expr, $1.loc);
                     }
                 |   Expr '+' Expr
                     {

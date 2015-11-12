@@ -9,4 +9,3 @@
 *** Error at (16,14): field 'mul' not found in 'class : Main'
 *** Error at (17,20): field 'mul' not found in 'class : Main'
 *** Error at (18,20): 'div' is not a method in class 'class : Main'
-*** Error at (26,18): incompatible operands: int unknow int

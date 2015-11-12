@@ -4,9 +4,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Stack;
 
+import javax.swing.text.html.HTML.Tag;
+
 import decaf.Driver;
 import decaf.Location;
 import decaf.tree.Tree;
+import decaf.tree.Tree.Expr;
 import decaf.error.BadArgCountError;
 import decaf.error.BadArgTypeError;
 import decaf.error.BadArrElementError;
@@ -22,6 +25,7 @@ import decaf.error.DecafError;
 import decaf.error.FieldNotAccessError;
 import decaf.error.FieldNotFoundError;
 import decaf.error.IncompatBinOpError;
+import decaf.error.IncompatTerOpError;
 import decaf.error.IncompatUnOpError;
 import decaf.error.NotArrayError;
 import decaf.error.NotClassError;
@@ -78,6 +82,28 @@ public class TypeCheck extends Tree.Visitor {
 				expr.type = BaseType.ERROR;
 			}
 		}
+		/**
+		 *  a++ & ++a
+		 */
+		else if (expr.tag == Tree.POSTINC || expr.tag == Tree.PREINC) {
+			if (!expr.expr.type.equal(BaseType.INT)
+					&& !expr.expr.type.equal(BaseType.ERROR)) {
+				issueError(new IncompatUnOpError(expr.getLocation(), "++",
+						expr.expr.type.toString()));
+			} 
+				expr.type = BaseType.INT;
+		}
+		/**
+		 * a-- & --a
+		 */
+		else if (expr.tag == Tree.POSTDEC || expr.tag == Tree.PREDEC) {
+			if (!expr.expr.type.equal(BaseType.INT)
+					&& !expr.expr.type.equal(BaseType.ERROR)) {
+				issueError(new IncompatUnOpError(expr.getLocation(), "--",
+						expr.expr.type.toString()));
+			} 
+				expr.type = BaseType.INT;
+		}
 		else{
 			if (!(expr.expr.type.equal(BaseType.BOOL) || expr.expr.type
 					.equal(BaseType.ERROR))) {
@@ -87,7 +113,20 @@ public class TypeCheck extends Tree.Visitor {
 			expr.type = BaseType.BOOL;
 		}
 	}
-
+	@Override
+	public void visitTernary(Tree.Ternary Ternary) {
+		checkTestExpr(Ternary.condition);
+		Ternary.left.accept(this);
+		Ternary.right.accept(this);
+		if (Ternary.left.type.equal(Ternary.right.type))
+			Ternary.type = Ternary.left.type;
+		else {
+			issueError(new IncompatTerOpError(Ternary.getLocation(),
+					Ternary.left.type.toString(),
+					Ternary.right.type.toString()));
+			Ternary.type = BaseType.ERROR;
+		}
+	}
 	@Override
 	public void visitLiteral(Tree.Literal literal) {
 		switch (literal.typeTag) {
